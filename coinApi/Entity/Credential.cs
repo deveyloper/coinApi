@@ -6,6 +6,7 @@
     {
         public string apiKey { get; set; }
         public string apiSecret { get; set; }
+        public string authKey { get; set; }
 
     }
 }

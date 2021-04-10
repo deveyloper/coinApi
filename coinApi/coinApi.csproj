@@ -11,4 +11,10 @@
   <ItemGroup>
     <Folder Include="Entity\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\test.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\test.html" />
+  </ItemGroup>
 </Project>

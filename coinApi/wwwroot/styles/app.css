@@ -1,0 +1,30 @@
+tr.buy{
+    color: green;
+
+}
+
+tr.sell{
+    color:red;
+}
+
+.table{
+    font-size:13px;
+    line-height: 0.75px;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    grid-column-gap: 10px;
+}
+
+.credentials{
+    display:grid;
+    grid-template-areas:"api-key" "api-secret" "button";
+    grid-row-gap:5px;
+}
+
+.balances-table td, .balances-table th {
+    text-align: right;
+}

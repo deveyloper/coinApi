@@ -66,6 +66,8 @@ namespace coinApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample Web API v1");
             });
+
+            app.UseStaticFiles("/wwwroot");
         }
     }
 }

@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/app.css?v=4" />
+</head>
+
+
+<body>
+    <div id="app">
+        <div class="main">
+            <div class="credentials">
+                <div class="api-key">
+                    <input style="width: 100%;" type="text" v-model="apiKey" placeholder="API KEY" />
+                </div>
+
+                <div class="api-secret">
+                    <input type="text" style="width: 100%;" v-model="apiSecret" placeholder="API SECRET" />
+
+                </div>
+                <button class="button" v-on:click="getBalances()">Get Balances</button>
+            </div>
+            <div class="balances">
+                <p style="text-align: center; font-weight: 500;">Balances</>
+                    <table class="balances-table table table-striped table-bordered">
+                        <tr>
+                            <th scope="col"> Symbol </th>
+                            <th scope="col">Total</th>
+                            <th scope="col">BTC Price</th>
+                            <th scope="col">USDT Price</th>
+
+                        <tr v-for="balance in balances">
+                            <th scope="row" style="cursor:pointer">
+                                <a v-on:click="open(balance.binanceBalance.asset)">{{balance.binanceBalance.asset}}</a>
+                            </th>
+                            <td>{{Number(balance.binanceBalance.free) + Number(balance.binanceBalance.locked)}}</td>
+                            <td v-if="balance.btcPrice != null">{{Number(balance.btcPrice.price)}}</td>
+                            <td v-if="balance.usdtPrice != null">{{Number(balance.usdtPrice.price)}}</td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="trades">
+                <p style="text-align: center; font-weight: 500;">
+                    Usdt Trades</>
+                    <table class="table table-custom">
+                        <tr>
+                            <td> Symbol </td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                            <td>Time</td>
+                        </tr>
+                        <tr v-for="trade in usdtTrades" v-bind:class="[trade.isBuyer ? 'buy' : 'sell']">
+                            <td>{{trade.symbol}}</td>
+                            <td>{{Number(trade.price)}}</td>
+                            <td>{{Number(trade.qty)}}</td>
+                            <td>{{Number(trade.qty ) * Number(trade.price )}}</td>
+                            <td>{{formatDate(Date(trade.time))}}</td>
+                        </tr>
+                    </table>
+                <p style="text-align: center;font-weight: 500;">
+                    Btc Trades</>
+                    <table class="table">
+                        <tr>
+                            <td> Symbol </td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                            <td>Time</td>
+                        </tr>
+                        <tr v-for="trade in btcTrades" v-bind:class="[trade.isBuyer ? 'buy' : 'sell']">
+                            <td>{{trade.symbol}}</td>
+                            <td>{{Number(trade.price)}}</td>
+                            <td>{{Number(trade.qty)}}</td>
+                            <td>{{Number(trade.qty ) * Number(trade.price )}}</td>
+                            <td>{{formatDate(Date(trade.time))}}</td>
+
+                        </tr>
+                    </table>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="scripts/crypto.js"></script>
+<script src="scripts/app.js"></script>
+
+</html>
